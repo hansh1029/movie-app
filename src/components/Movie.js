@@ -3,13 +3,20 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Movie.css";
 
-function Movie({ id, year, title, summary, poster, genres }) {
+function Movie({ id, year, title, summary, poster, genres, path }) {
+  let summaryDisplay = "";
+  if (path === undefined) {
+    summaryDisplay = `${summary.slice(0, 180)}...`;
+  } else {
+    summaryDisplay = summary;
+  }
   return (
     <div className="movie">
       <Link
         to={{
           pathname: `/movie/${id}`,
           state: {
+            id,
             year,
             title,
             summary,
@@ -29,7 +36,7 @@ function Movie({ id, year, title, summary, poster, genres }) {
               </li>
             ))}
           </ul>
-          <p className="movie__summary">{summary.slice(0, 180)}...</p>
+          <p className="movie__summary">{summaryDisplay}</p>
         </div>
       </Link>
     </div>

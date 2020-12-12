@@ -1,4 +1,5 @@
 import React from "react";
+import Movie from "../components/Movie";
 
 class Detail extends React.Component {
   componentDidMount() {
@@ -8,9 +9,23 @@ class Detail extends React.Component {
     }
   }
   render() {
-    const { location } = this.props;
-    if (location.state) {
-      return <span>{location.state.title}</span>;
+    const { state } = this.props.location;
+    const { path } = this.props.match;
+    if (state) {
+      return (
+        <div className="detail__container">
+          <Movie
+            key={state.id}
+            id={state.id}
+            year={state.year}
+            title={state.title}
+            summary={state.summary}
+            poster={state.poster}
+            genres={state.genres}
+            path={path}
+          />
+        </div>
+      );
     } else {
       return null;
     }
